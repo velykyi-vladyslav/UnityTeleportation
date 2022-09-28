@@ -11,10 +11,21 @@ public class Hand :  MonoBehaviour
     //Stores what kind of characteristics we're looking for with our Input Device when we search for it later
     public InputDeviceCharacteristics inputDeviceCharacteristics;
 
+    //Allows for hiding of hand prefab if set to true
+    public bool hideHandOnSelect = false;
+
     //Stores the InputDevice that we're Targeting once we find it in InitializeHand()
     private InputDevice _targetDevice;
     private Animator _handAnimator;
-
+    private SkinnedMeshRenderer _handMesh;
+    
+    public void HideHandOnSelect()
+    {
+        if(hideHandOnSelect)
+        {
+            _handMesh.enabled = !_handMesh.enabled;
+        }
+    }
 
     private void Start()
     {
@@ -31,48 +42,48 @@ public class Hand :  MonoBehaviour
         //We check if any devices are found here to avoid errors.
         if (devices.Count > 0)
         {
-            
+
             _targetDevice = devices[0];
 
             GameObject spawnedHand = Instantiate(handPrefab, transform);
             _handAnimator = spawnedHand.GetComponent<Animator>();
+            _handMesh = spawnedHand.GetComponentInChildren<SkinnedMeshRenderer>();
         }
     }
 
+        // Update is called once per frame
+        private void Update()
+        {
+            //Since our target device might not register at the start of the scene, we continously check until one is found.
+            if (!_targetDevice.isValid)
+            {
+                InitializeHand();
+            }
+            else
+            {
+                UpdateHand();
+            }
+        }
 
-    // Update is called once per frame
-    private void Update()
-    {
-        //Since our target device might not register at the start of the scene, we continously check until one is found.
-        if(!_targetDevice.isValid)
+        private void UpdateHand()
         {
-            InitializeHand();
+            //This will get the value for our trigger from the target device and output a flaot into triggerValue
+            if (_targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue))
+            {
+                _handAnimator.SetFloat("Trigger", triggerValue);
+            }
+            else
+            {
+                _handAnimator.SetFloat("Trigger", 0);
+            }
+            //This will get the value for our grip from the target device and output a flaot into gripValue
+            if (_targetDevice.TryGetFeatureValue(CommonUsages.grip, out float gripValue))
+            {
+                _handAnimator.SetFloat("Grip", gripValue);
+            }
+            else
+            {
+                _handAnimator.SetFloat("Grip", 0);
+            }
         }
-        else
-        {
-            UpdateHand();
-        }
-    }
-
-    private void UpdateHand()
-    {
-        //This will get the value for our trigger from the target device and output a flaot into triggerValue
-        if (_targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue))
-        {
-            _handAnimator.SetFloat("Trigger", triggerValue);
-        }
-        else
-        {
-            _handAnimator.SetFloat("Trigger", 0);
-        }
-        //This will get the value for our grip from the target device and output a flaot into gripValue
-        if (_targetDevice.TryGetFeatureValue(CommonUsages.grip, out float gripValue))
-        {
-            _handAnimator.SetFloat("Grip", gripValue);
-        }
-        else
-        {
-            _handAnimator.SetFloat("Grip", 0);
-        }
-    }
 }
