@@ -75,6 +75,4 @@ public class Hand :  MonoBehaviour
             _handAnimator.SetFloat("Grip", 0);
         }
     }
-
-
 }

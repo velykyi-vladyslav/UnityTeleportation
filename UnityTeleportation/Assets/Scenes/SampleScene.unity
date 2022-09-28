@@ -1914,6 +1914,7 @@ GameObject:
   - component: {fileID: 1985311194}
   - component: {fileID: 1985311196}
   - component: {fileID: 1985311195}
+  - component: {fileID: 1985311197}
   m_Layer: 0
   m_Name: RightHand Controller
   m_TagString: Untagged
@@ -1951,7 +1952,7 @@ MonoBehaviour:
   m_UpdateTrackingType: 0
   m_EnableInputTracking: 1
   m_EnableInputActions: 1
-  m_ModelPrefab: {fileID: 5686134208185136530, guid: 1fd3a7c43c8190f4d8c167ebde694364, type: 3}
+  m_ModelPrefab: {fileID: 0}
   m_ModelParent: {fileID: 0}
   m_Model: {fileID: 0}
   m_AnimateModel: 0
@@ -2194,6 +2195,20 @@ MonoBehaviour:
   m_PlayHapticsOnHoverCanceled: 0
   m_HapticHoverCancelIntensity: 0
   m_HapticHoverCancelDuration: 0
+--- !u!114 &1985311197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1985311189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a30d95807c42e6740bf25ae0ee48ab01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handPrefab: {fileID: 3240524871627034548, guid: 534053b397750e74588f25f926e8da72, type: 3}
+  inputDeviceCharacteristics: 576
 --- !u!4 &2045541815 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3327402909281065737, guid: 558e2ed9affd8ee4d8f7f134f4cf3c88, type: 3}
