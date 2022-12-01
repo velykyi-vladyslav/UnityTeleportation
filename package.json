@@ -1,0 +1,11 @@
+{
+    "name": "com.velykyi.vladyslav.UnityTeleportation",
+    "version": "1.0.0",
+    "displayName": "VR motion sickness research",
+    "description": "Sample project that contains implementation of Teleportation and Continuous movement for VR motion sickness investigation",
+    "unity": "2021.3",
+    "author": {
+        "name": "Velykyi, Vladyslav",
+        "email": "vladyslav.velykyi.7@gmail.com"
+    }
+}
